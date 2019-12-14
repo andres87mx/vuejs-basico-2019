@@ -15,10 +15,20 @@
       <span v-if="changePercent > 0">😃</span>
       <pan v-else-if="changePercent < 0">🙃</pan>
       <span v-else>😕</span>
-      <span v-show="changePercent > 0">😃</span>
+      <!-- <span v-show="changePercent > 0">😃</span>
       <pan v-show="changePercent < 0">🙃</pan>
-      <span v-show="changePercent == 0">😕</span>
+      <span v-show="changePercent == 0">😕</span> -->
     </h1>
+    <ul>
+      <li v-for="(price, index) in prices" v-bind:key="price">
+        {{ index }} - {{ price }}
+      </li>
+    </ul>
+    <ul>
+      <li v-for="(priceWithDay, index) in pricesWithDays" v-bind:key="priceWithDay.day">
+        {{ index }} - {{ priceWithDay.day }} - {{ priceWithDay.value }}
+      </li>
+    </ul>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="app.js"></script>

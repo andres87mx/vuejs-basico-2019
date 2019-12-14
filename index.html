@@ -30,7 +30,8 @@
         {{ index }} - {{ price }}
       </li>
     </ul> -->
-    
+    <input type="number" v-model="value">
+    <span>{{ convertedValue }}</span>
     <ul v-show="showPrices">
       <li 
         class="uppercase"

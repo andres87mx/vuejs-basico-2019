@@ -17,6 +17,12 @@ Vue.component('CoinDetail', {
       return `${this.coin.name} - ${this.coin.symbol}`
     }
   },
+  created() {
+    console.log('created hijo');
+  },
+  mounted() {
+    console.log('mounted hijo');
+  },
   methods: {
     toggleShowPrices () {
       this.showPrices = !this.showPrices
@@ -76,6 +82,12 @@ new Vue({
       },
       color: 'f4f4f4'
     }
+  },
+  created() {
+    console.log('created');
+  },
+  mounted() {
+    console.log('mounted');
   },
   methods: {
     updateColor (color) {

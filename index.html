@@ -10,37 +10,9 @@
 </head>
 <body>
   <div id="app" v-bind:style="{ background: '#' + color }">
-    <img 
-    v-on:mouseover="toggleShowPrices"
-    v-on:mouseout="toggleShowPrices"
-    v-bind:src="img" v-bind:alt="name">
-    <h1 
-      v-bind:class="changePercent > 0? 'green' : 'red'">
-      {{ title }}
-      <span v-if="changePercent > 0">😃</span>
-      <span v-else-if="changePercent < 0">🙃</span>
-      <span v-else>😕</span>
-      <!-- <span v-show="changePercent > 0">😃</span>
-      <pan v-show="changePercent < 0">🙃</pan>
-      <span v-show="changePercent == 0">😕</span> -->
-      <span v-on:click="toggleShowPrices">{{ showPrices ? '➖' : '➕'}}</span>
-    </h1>
-    <!-- <ul>
-      <li v-for="(price, index) in prices" v-bind:key="price">
-        {{ index }} - {{ price }}
-      </li>
-    </ul> -->
-    <input type="number" v-model="value">
-    <span>{{ convertedValue }}</span>
-    <ul v-show="showPrices">
-      <li 
-        class="uppercase"
-        v-bind:class="{orange: priceWithDay.value == price, red: priceWithDay.value < price, green: priceWithDay.value > price}"
-        v-for="(priceWithDay, index) in pricesWithDays" 
-        v-bind:key="priceWithDay.day">
-        {{ index }} - {{ priceWithDay.day }} - {{ priceWithDay.value }}
-      </li>
-    </ul>
+    
+    <coin-detail v-bind:coin="btc"></coin-detail>
+  
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="app.js"></script>

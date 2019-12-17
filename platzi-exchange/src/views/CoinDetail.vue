@@ -50,22 +50,27 @@
 
         <div class="my-10 sm:mt-0 flex flex-col justify-center text-center">
           <button
+            @click="toogleConverter"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
-            Cambiar
+            {{ fromUsd ? `USD a ${asset.symbol}` : `${asset.symbol} a USD` }}
           </button>
 
           <div class="flex flex-row my-5">
             <label class="w-full" for="convertValue">
               <input
+                v-model="convertValue"
                 id="convertValue"
                 type="number"
+                :placeholder="`Valor en ${fromUsd ? 'USD' : asset.symbol}`"
                 class="text-center bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
               />
             </label>
           </div>
 
-          <span class="text-xl"></span>
+          <span class="text-xl"
+            >{{ convertResult }} {{ fromUsd ? asset.symbol : "USD" }}</span
+          >
         </div>
       </div>
       <line-chart
@@ -117,7 +122,9 @@ export default {
       asset: {},
       history: [],
       markets: [],
-      isLoading: false
+      isLoading: false,
+      fromUsd: true,
+      convertValue: null
     };
   },
 
@@ -127,24 +134,35 @@ export default {
         ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
       );
     },
-
     max() {
       return Math.max(
         ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
       );
     },
-
     avg() {
       return Math.abs(
         ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
       );
+    },
+    convertResult() {
+      if (!this.convertValue) {
+        return 0;
+      }
+      const result = this.fromUsd
+        ? this.convertValue / this.asset.priceUsd
+        : this.convertValue * this.asset.priceUsd;
+      return result.toFixed(4);
     }
   },
 
   created() {
     this.getCoin();
   },
-
+  watch: {
+    $route() {
+      this.getCoin();
+    }
+  },
   methods: {
     getCoin() {
       this.isLoading = true;
@@ -171,6 +189,9 @@ export default {
         .finally(() => {
           this.$set(exchange, "isLoading", false);
         });
+    },
+    toogleConverter() {
+      this.fromUsd = !this.fromUsd;
     }
   }
 };

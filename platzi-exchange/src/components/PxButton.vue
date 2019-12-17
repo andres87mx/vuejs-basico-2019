@@ -12,10 +12,10 @@
 export default {
   name: "PxButton",
   props: {
-      isLoading: {
-          type: Boolean,
-          default: false
-      }
+    isLoading: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     buttonClick() {

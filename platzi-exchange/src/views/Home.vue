@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="flex justify-center">
+      <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
+    </div>
     <px-assets-table v-bind:assets="assets"></px-assets-table>
   </div>
 </template>
@@ -14,11 +17,16 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       assets: []
     };
   },
   created() {
-    api.getAssets().then(assets => (this.assets = assets));
+    this.isLoading = true;
+    api
+      .getAssets()
+      .then(assets => (this.assets = assets))
+      .finally(() => (this.isLoading = false));
   }
 };
 </script>

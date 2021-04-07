@@ -13,7 +13,7 @@
     "core-js": "^3.4.3",
     "numeral": "^2.0.6",
     "tailwindcss": "^1.1.2",
-    "vue": "^2.6.10",
+    "vue": "^2.6.12",
     "vue-chartkick": "^0.6.0",
     "vue-router": "^3.1.3"
   },
